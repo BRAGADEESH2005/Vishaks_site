@@ -2,7 +2,7 @@
 
 import { Environment, Lightformer } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
-import { useEffect, useLayoutEffect, useMemo, useRef } from "react";
+import { Suspense, useEffect, useLayoutEffect, useMemo, useRef } from "react";
 import * as THREE from "three";
 import { ATMOSPHERES, sunDirection, type AtmosphereId } from "@/lib/three/atmosphere";
 
@@ -50,34 +50,42 @@ const skyFragment = /* glsl */ `
   }
 `;
 
+/** The painted sky dome shared by every scene. */
+export function makeSkyMaterial(a: (typeof ATMOSPHERES)[AtmosphereId], dir: [number, number, number]) {
+  return new THREE.ShaderMaterial({
+    vertexShader: skyVertex,
+    fragmentShader: skyFragment,
+    side: THREE.BackSide,
+    depthWrite: false,
+    fog: false,
+    uniforms: {
+      zenith: { value: new THREE.Color(a.sky.zenith) },
+      horizon: { value: new THREE.Color(a.sky.horizon) },
+      belt: { value: new THREE.Color(a.sky.belt) },
+      // Below the horizon the dome matches the fog, so distant ground meets the sky without a seam.
+      ground: { value: new THREE.Color(a.fog.color) },
+      sunDir: { value: new THREE.Vector3(...dir) },
+      sunColor: { value: new THREE.Color(a.sun.color) },
+      beltStrength: { value: a.sky.beltStrength },
+      glow: { value: a.sky.glow },
+    },
+  });
+}
+
 export type ShadowFrame = { extent: number; target?: [number, number, number]; distance?: number; mapSize?: number };
 
-export function Atmosphere({ preset, shadow }: { preset: AtmosphereId; shadow: ShadowFrame }) {
+/** Mounts only once everything in its Suspense boundary has loaded. */
+function Ready({ onReady }: { onReady: () => void }) {
+  useEffect(() => onReady(), [onReady]);
+  return null;
+}
+
+export function Atmosphere({ preset, shadow, onEnvReady }: { preset: AtmosphereId; shadow: ShadowFrame; onEnvReady?: () => void }) {
   const a = ATMOSPHERES[preset];
   const sun = useRef<THREE.DirectionalLight>(null);
   const dir = useMemo(() => sunDirection(a.sun.azimuth, a.sun.elevation), [a.sun.azimuth, a.sun.elevation]);
 
-  const skyMaterial = useMemo(
-    () =>
-      new THREE.ShaderMaterial({
-        vertexShader: skyVertex,
-        fragmentShader: skyFragment,
-        side: THREE.BackSide,
-        depthWrite: false,
-        fog: false,
-        uniforms: {
-          zenith: { value: new THREE.Color(a.sky.zenith) },
-          horizon: { value: new THREE.Color(a.sky.horizon) },
-          belt: { value: new THREE.Color(a.sky.belt) },
-          ground: { value: new THREE.Color(a.sky.ground) },
-          sunDir: { value: new THREE.Vector3(...dir) },
-          sunColor: { value: new THREE.Color(a.sun.color) },
-          beltStrength: { value: a.sky.beltStrength },
-          glow: { value: a.sky.glow },
-        },
-      }),
-    [a, dir],
-  );
+  const skyMaterial = useMemo(() => makeSkyMaterial(a, dir), [a, dir]);
   useEffect(() => () => skyMaterial.dispose(), [skyMaterial]);
 
   // React Three Fiber already uses ACES Filmic tone mapping; only exposure varies.
@@ -125,8 +133,8 @@ export function Atmosphere({ preset, shadow }: { preset: AtmosphereId; shadow: S
       />
       <hemisphereLight args={[a.hemi.sky, a.hemi.ground, a.hemi.intensity]} />
       {/* Reflections only: an environment of soft light panels matched to the sky. */}
-      <Environment resolution={256} frames={1} background={false}>
-        <color attach="background" args={[a.sky.zenith]} />
+      <Suspense fallback={null}>
+      <Environment files={a.hdri} environmentIntensity={a.envIntensity} resolution={256} frames={1} background={false}>
         <Lightformer form="rect" intensity={a.env.cool} color={a.sky.zenith} position={[0, 30, 0]} rotation-x={Math.PI / 2} scale={[80, 80, 1]} />
         {/* The afterglow: a tall, soft warm wash on the sun side, brightest at the horizon. */}
         <Lightformer
@@ -155,6 +163,8 @@ export function Atmosphere({ preset, shadow }: { preset: AtmosphereId; shadow: S
         />
         <Lightformer form="rect" intensity={0.6} color={a.sky.ground} position={[0, -20, 0]} rotation-x={-Math.PI / 2} scale={[80, 80, 1]} />
       </Environment>
+      {onEnvReady && <Ready onReady={onEnvReady} />}
+      </Suspense>
     </>
   );
 }

@@ -3,6 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Gallery } from "@/components/sections/Gallery";
+import { ModelViewer } from "@/components/sections/ModelViewer";
+import { MODEL_VIEWS } from "@/lib/three/modelViews";
 import { TowerExplorer } from "@/components/sections/TowerExplorer";
 import { ArrowLink, ButtonLink } from "@/components/ui/ArrowLink";
 import { ConceptNote } from "@/components/ui/ConceptNote";
@@ -66,7 +68,7 @@ export default async function ProjectPage({ params }: { params: Promise<Params> 
             <h1 data-reveal="lines" className="mt-6 text-display-xl">
               {project.name}
             </h1>
-            <p className="mt-4 text-lede italic text-ivory/70">{project.meaning}</p>
+            <p className="mt-4 text-lede italic text-ivory/70">{project.tagline}</p>
             <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-4">
               <p className="label text-ivory/80">
                 {project.type} · {project.corridor}
@@ -121,6 +123,23 @@ export default async function ProjectPage({ params }: { params: Promise<Params> 
                 <p className="max-w-md text-ivory/65">Turn the concept model and choose a level to see how a floor is planned.</p>
               </div>
               <TowerExplorer />
+            </div>
+          </section>
+        )}
+
+        {MODEL_VIEWS[project.slug] && (
+          <section aria-labelledby="model-title" className="on-dark bg-ink py-24 text-ivory md:py-32">
+            <div className="gutter shell">
+              <div className="mb-12 flex flex-wrap items-end justify-between gap-6">
+                <div>
+                  <p className="label text-bronze-light">Interactive concept model</p>
+                  <h2 id="model-title" data-reveal="lines" className="mt-4 text-display-l">
+                    Walk around {project.name}
+                  </h2>
+                </div>
+                <p className="max-w-md text-ivory/65">Turn the model, zoom in, and see it from first light to night. It is the same model the concept images are rendered from.</p>
+              </div>
+              <ModelViewer slug={project.slug} name={project.name} poster={project.cover} />
             </div>
           </section>
         )}

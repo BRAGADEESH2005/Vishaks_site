@@ -69,13 +69,36 @@ export function SiteHeader() {
   }, [open]);
 
   const solid = scrolled;
-  const shell = solid ? "bg-ivory/92 text-ink border-line backdrop-blur-md" : "bg-transparent text-ivory border-transparent";
+  const bar = useRef<HTMLSpanElement>(null);
+
+  // A hairline under the header shows how far through the page the visitor is.
+  useEffect(() => {
+    let raf = 0;
+    const update = () => {
+      raf = 0;
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      if (bar.current) bar.current.style.transform = `scaleX(${max > 0 ? window.scrollY / max : 0})`;
+    };
+    const onScroll = () => {
+      if (!raf) raf = requestAnimationFrame(update);
+    };
+    update();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+      cancelAnimationFrame(raf);
+    };
+  }, [pathname]);
+  const shell = solid ? "bg-ivory/80 text-ink border-line shadow-[0_10px_30px_-20px_rgb(21_17_14/0.35)] backdrop-blur-xl backdrop-saturate-150" : "bg-transparent text-ivory border-transparent";
 
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 border-b transition-colors duration-500 ${shell}`}
       style={{ paddingTop: "env(safe-area-inset-top, 0px)" }}
     >
+      <span ref={bar} aria-hidden="true" className="absolute inset-x-0 bottom-[-1px] h-px origin-left scale-x-0 bg-bronze" />
       <div className="gutter shell flex h-[4.25rem] items-center justify-between gap-6 md:h-20">
         <Link href="/" aria-label="Vishaks, home" className="shrink-0">
           <Logo />

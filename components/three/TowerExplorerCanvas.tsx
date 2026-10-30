@@ -7,6 +7,7 @@ import * as THREE from "three";
 import { buildResidentialTower } from "@/lib/three/builders/tower";
 import { createKit, disposeKit, disposeObject } from "@/lib/three/kit";
 import { Atmosphere } from "./Atmosphere";
+import { Finish } from "./Finish";
 
 const PLINTH = 3;
 const SPEC = { floors: 34, width: 26, depth: 19, seed: 101, lit: 0.35, skyGardens: [12, 24] };
@@ -84,6 +85,7 @@ export default function TowerExplorerCanvas({ selected, onSelect }: { selected: 
     >
       <Atmosphere preset="dusk" shadow={{ extent: 90, target: [0, 40, 0], distance: 400, mapSize: 2048 }} />
       <Tower selected={selected} onSelect={onSelect} />
+      <Finish quality="lite" />
       <OrbitControls
         target={[0, height * 0.5, 0]}
         enablePan={false}

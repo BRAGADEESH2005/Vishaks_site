@@ -171,3 +171,36 @@
   padding-bottom: 0.08em;
   margin-bottom: -0.08em;
 }
+
+/* Lenis drives scrolling; native smooth scroll would fight it. */
+html.lenis-on {
+  scroll-behavior: auto !important;
+}
+html.lenis-on body {
+  height: auto;
+}
+
+/* Process journey: each stage's line drawing draws itself in when it becomes active. */
+.stage-draw .stage-line {
+  stroke-dasharray: 1 1;
+  animation: stage-draw 1.6s var(--ease-architect, cubic-bezier(0.2, 0.7, 0.1, 1)) both;
+}
+@keyframes stage-draw {
+  from { stroke-dashoffset: 1; }
+  to { stroke-dashoffset: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .stage-draw .stage-line { animation: none; }
+}
+
+/* Loading screen: the mark breathes while the site loads. */
+.loader-mark {
+  animation: loader-breathe 2.4s var(--ease-architect) infinite;
+}
+@keyframes loader-breathe {
+  0%, 100% { opacity: 0.55; transform: translateY(0); }
+  50% { opacity: 1; transform: translateY(-3px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .loader-mark { animation: none; }
+}

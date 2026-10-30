@@ -3,6 +3,7 @@ import { ArrowLink } from "@/components/ui/ArrowLink";
 import { ConceptNote } from "@/components/ui/ConceptNote";
 import { conceptImages, projects, type Project } from "@/data/projects";
 import { DevelopmentIndex } from "./DevelopmentIndex";
+import { ProjectReel } from "./ProjectReel";
 
 const bySlug = (slug: string): Project => {
   const p = projects.find((x) => x.slug === slug);
@@ -18,7 +19,7 @@ export function SignatureDevelopments() {
           <p className="label text-muted md:col-span-3">Signature developments</p>
           <div className="md:col-span-9">
             <h2 id="developments-title" data-reveal="lines" className="text-display-l">
-              Four concepts, one way of building.
+              Four kinds of space, one way of building.
             </h2>
             <p data-reveal="fade" className="mt-8 max-w-2xl text-lede text-muted">
               Each concept shows how Vishaks would approach a site in one of its target corridors. None of them is a launched
@@ -26,9 +27,13 @@ export function SignatureDevelopments() {
             </p>
           </div>
         </div>
-        <div className="mt-16 md:mt-24">
-          <DevelopmentIndex projects={projects} />
-        </div>
+      </div>
+      <div className="mt-16 md:mt-24">
+        <ProjectReel projects={projects} />
+      </div>
+      <div className="gutter shell mt-20 md:mt-28">
+        <p className="label mb-6 text-muted">Index</p>
+        <DevelopmentIndex projects={projects} />
       </div>
     </section>
   );
@@ -49,58 +54,58 @@ function Facts({ project }: { project: Project }) {
 }
 
 export function ResidentialPortfolio() {
-  const kadal = bySlug("kadal-residences");
-  const marutham = bySlug("marutham");
+  const residential = bySlug("residential-spaces");
+  const coworking = bySlug("coworking-spaces");
   return (
     <section aria-labelledby="residential-title" className="bg-paper py-28 md:py-40">
       <div className="gutter shell">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <h2 id="residential-title" data-reveal="lines" className="max-w-3xl text-display-l">
-            Residences
+            Homes and workspace
           </h2>
-          <p className="label text-muted">Towers and plotted communities</p>
+          <p className="label text-muted">Residential towers and coworking campuses</p>
         </div>
 
-        {/* Kadal: a tall plate, text set low beside it. */}
+        {/* Residential: a tall plate, text set low beside it. */}
         <article className="mt-16 grid items-end gap-12 md:mt-24 md:grid-cols-12 md:gap-10">
           <figure className="md:col-span-7">
             <div data-reveal="clip" className="relative aspect-[5/6] overflow-hidden bg-stone md:aspect-[6/7]">
-              <Image src={conceptImages.kadalDeck.src} alt={conceptImages.kadalDeck.alt} fill sizes="(min-width: 768px) 58vw, 100vw" placeholder="blur" className="object-cover" />
+              <Image src={conceptImages.residentialDeck.src} alt={conceptImages.residentialDeck.alt} fill sizes="(min-width: 768px) 58vw, 100vw" placeholder="blur" className="object-cover" />
             </div>
-            <figcaption className="label mt-4 text-muted">{conceptImages.kadalDeck.caption}</figcaption>
+            <figcaption className="label mt-4 text-muted">{conceptImages.residentialDeck.caption}</figcaption>
           </figure>
           <div className="md:col-span-4 md:col-start-9 md:pb-16">
             <p className="label text-bronze">
-              {kadal.type} · {kadal.corridor}
+              {residential.type} · {residential.corridor}
             </p>
             <h3 data-reveal="fade" className="mt-5 text-display-m">
-              {kadal.name}
+              {residential.name}
             </h3>
-            <p className="mt-6 text-muted">{kadal.description[0]}</p>
-            <Facts project={kadal} />
+            <p className="mt-6 text-muted">{residential.description[0]}</p>
+            <Facts project={residential} />
             <div className="mt-10 flex flex-wrap items-center gap-6">
-              <ArrowLink href={`/projects/${kadal.slug}`}>Explore {kadal.name}</ArrowLink>
+              <ArrowLink href={`/projects/${residential.slug}`}>Explore {residential.name}</ArrowLink>
               <ConceptNote>Concept</ConceptNote>
             </div>
           </div>
         </article>
 
-        {/* Marutham: a wide aerial plate with the text overlapping its lower edge. */}
+        {/* Coworking: a wide aerial plate with the text overlapping its lower edge. */}
         <article className="relative mt-28 md:mt-44">
           <figure>
             <div data-reveal="clip" className="relative aspect-[4/3] overflow-hidden bg-stone md:ml-[16%] md:aspect-[16/9]">
-              <Image src={conceptImages.maruthamAerial.src} alt={conceptImages.maruthamAerial.alt} fill sizes="(min-width: 768px) 84vw, 100vw" placeholder="blur" className="object-cover" />
+              <Image src={conceptImages.coworkingExterior.src} alt={conceptImages.coworkingExterior.alt} fill sizes="(min-width: 768px) 84vw, 100vw" placeholder="blur" className="object-cover" />
             </div>
-            <figcaption className="label mt-4 text-muted md:ml-[16%]">{conceptImages.maruthamAerial.caption}</figcaption>
+            <figcaption className="label mt-4 text-muted md:ml-[16%]">{conceptImages.coworkingExterior.caption}</figcaption>
           </figure>
           <div data-reveal="fade" className="relative mt-10 bg-ivory md:-mt-40 md:w-[40%] md:p-12">
             <p className="label text-bronze">
-              {marutham.type} · {marutham.corridor}
+              {coworking.type} · {coworking.corridor}
             </p>
-            <h3 className="mt-5 text-display-m">{marutham.name}</h3>
-            <p className="mt-6 text-muted">{marutham.description[0]}</p>
+            <h3 className="mt-5 text-display-m">{coworking.name}</h3>
+            <p className="mt-6 text-muted">{coworking.description[0]}</p>
             <div className="mt-10 flex flex-wrap items-center gap-6">
-              <ArrowLink href={`/projects/${marutham.slug}`}>Explore {marutham.name}</ArrowLink>
+              <ArrowLink href={`/projects/${coworking.slug}`}>Explore {coworking.name}</ArrowLink>
               <ConceptNote>Concept</ConceptNote>
             </div>
           </div>
@@ -111,11 +116,11 @@ export function ResidentialPortfolio() {
 }
 
 export function CommercialPortfolio() {
-  const ambalam = bySlug("ambalam-offices");
-  const sandhai = bySlug("sandhai");
-  const ledger = ambalam.specs.flatMap((g) => g.items);
+  const office = bySlug("office-spaces");
+  const retail = bySlug("retail-spaces");
+  const ledger = office.specs.flatMap((g) => g.items);
   return (
-    <section aria-labelledby="commercial-title" className="on-dark bg-ink py-28 text-ivory md:py-40">
+    <section aria-labelledby="commercial-title" data-reveal="curtain" className="on-dark bg-ink py-28 text-ivory md:py-40">
       <div className="gutter shell">
         <div className="grid gap-8 md:grid-cols-12">
           <h2 id="commercial-title" data-reveal="lines" className="text-display-l md:col-span-7">
@@ -131,21 +136,21 @@ export function CommercialPortfolio() {
           <figure>
             <div data-reveal="clip" className="relative aspect-[4/3] overflow-hidden bg-ink-3 md:aspect-[21/9]">
               <div data-parallax className="absolute inset-0">
-                <Image src={conceptImages.ambalamExterior.src} alt={conceptImages.ambalamExterior.alt} fill sizes="100vw" placeholder="blur" className="object-cover" />
+                <Image src={conceptImages.officeExterior.src} alt={conceptImages.officeExterior.alt} fill sizes="100vw" placeholder="blur" className="object-cover" />
               </div>
             </div>
-            <figcaption className="label mt-4 text-ivory/55">{conceptImages.ambalamExterior.caption}</figcaption>
+            <figcaption className="label mt-4 text-ivory/55">{conceptImages.officeExterior.caption}</figcaption>
           </figure>
           <div className="mt-14 grid gap-12 md:grid-cols-12">
             <div className="md:col-span-5">
               <p className="label text-bronze-light">
-                {ambalam.type} · {ambalam.corridor}
+                {office.type} · {office.corridor}
               </p>
-              <h3 className="mt-5 text-display-m">{ambalam.name}</h3>
-              <p className="mt-6 text-ivory/70">{ambalam.description[1]}</p>
+              <h3 className="mt-5 text-display-m">{office.name}</h3>
+              <p className="mt-6 text-ivory/70">{office.description[1]}</p>
               <div className="mt-10 flex flex-wrap items-center gap-6">
-                <ArrowLink href={`/projects/${ambalam.slug}`} tone="light">
-                  Explore {ambalam.name}
+                <ArrowLink href={`/projects/${office.slug}`} tone="light">
+                  Explore {office.name}
                 </ArrowLink>
                 <ConceptNote tone="light">Concept</ConceptNote>
               </div>
@@ -165,15 +170,15 @@ export function CommercialPortfolio() {
         <article className="mt-28 grid items-center gap-12 md:mt-40 md:grid-cols-12 md:gap-10">
           <div className="order-2 md:order-1 md:col-span-4">
             <p className="label text-bronze-light">
-              {sandhai.type} · {sandhai.corridor}
+              {retail.type} · {retail.corridor}
             </p>
             <h3 data-reveal="fade" className="mt-5 text-display-m">
-              {sandhai.name}
+              {retail.name}
             </h3>
-            <p className="mt-6 text-ivory/70">{sandhai.description[1]}</p>
+            <p className="mt-6 text-ivory/70">{retail.description[1]}</p>
             <div className="mt-10 flex flex-wrap items-center gap-6">
-              <ArrowLink href={`/projects/${sandhai.slug}`} tone="light">
-                Explore {sandhai.name}
+              <ArrowLink href={`/projects/${retail.slug}`} tone="light">
+                Explore {retail.name}
               </ArrowLink>
               <ConceptNote tone="light">Concept</ConceptNote>
             </div>
@@ -181,14 +186,14 @@ export function CommercialPortfolio() {
           <div className="order-1 grid grid-cols-12 gap-4 md:order-2 md:col-span-7 md:col-start-6">
             <figure className="col-span-12 sm:col-span-8">
               <div data-reveal="clip" className="relative aspect-[3/2] overflow-hidden bg-ink-3">
-                <Image src={conceptImages.sandhaiStreet.src} alt={conceptImages.sandhaiStreet.alt} fill sizes="(min-width: 768px) 38vw, 100vw" placeholder="blur" className="object-cover" />
+                <Image src={conceptImages.retailStreet.src} alt={conceptImages.retailStreet.alt} fill sizes="(min-width: 768px) 38vw, 100vw" placeholder="blur" className="object-cover" />
               </div>
             </figure>
             <figure className="col-span-8 col-start-5 sm:col-span-4 sm:mt-40">
               <div data-reveal="clip" className="relative aspect-[3/4] overflow-hidden bg-ink-3">
-                <Image src={conceptImages.sandhaiArcade.src} alt={conceptImages.sandhaiArcade.alt} fill sizes="(min-width: 768px) 20vw, 66vw" placeholder="blur" className="object-cover" />
+                <Image src={conceptImages.retailArcade.src} alt={conceptImages.retailArcade.alt} fill sizes="(min-width: 768px) 20vw, 66vw" placeholder="blur" className="object-cover" />
               </div>
-              <figcaption className="label mt-4 text-ivory/55">Sandhai. Concept visualisations.</figcaption>
+              <figcaption className="label mt-4 text-ivory/55">Retail Spaces. Concept visualisations.</figcaption>
             </figure>
           </div>
         </article>

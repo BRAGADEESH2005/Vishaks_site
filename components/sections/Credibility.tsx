@@ -1,12 +1,33 @@
+import { ProcessJourney } from "./ProcessJourney";
 import { ToConfirm } from "@/components/ui/ConceptNote";
 import { site } from "@/data/site";
 
 const stages = [
-  { step: "Select", body: "Shortlist land inside a target corridor against a fixed checklist of title, access and demand." },
-  { step: "Secure", body: "Buy outright, or sign a joint development agreement with the landowner." },
-  { step: "Approve", body: "Planning permission, environmental clearance and TNRERA registration before any marketing." },
-  { step: "Build", body: "Construction with progress published on each project page." },
-  { step: "Sell or lease", body: "Plots and homes are sold. Offices and retail can be leased and held." },
+  {
+    step: "Select",
+    body: "Shortlist land inside a target corridor against a fixed checklist of title, access and demand.",
+    detail: "Every parcel is judged as an investor would judge it: a clean title chain, road access, the zoning it allows and the demand around it, before any design work begins.",
+  },
+  {
+    step: "Secure",
+    body: "Buy outright, or sign a joint development agreement with the landowner.",
+    detail: "Landowners can sell, or stay invested through a joint development agreement that shares the finished built area or revenue.",
+  },
+  {
+    step: "Approve",
+    body: "Planning permission, environmental clearance and TNRERA registration before any marketing.",
+    detail: "Nothing is offered for sale until the project is registered with TNRERA, and the registration is shown on the project page.",
+  },
+  {
+    step: "Build",
+    body: "Construction with progress published on each project page.",
+    detail: "Progress is reported stage by stage with photographs, so buyers, tenants and partners can check the work for themselves.",
+  },
+  {
+    step: "Sell or lease",
+    body: "Plots and homes are sold. Offices and retail can be leased and held.",
+    detail: "Residential projects are sold. Commercial buildings can be leased to occupiers and held as income-producing assets.",
+  },
 ];
 
 /**
@@ -69,15 +90,9 @@ export function Credibility() {
               From a parcel of land to a finished address, in five stages.
             </h3>
           </div>
-          <ol data-reveal="stagger" className="mt-14 grid gap-px bg-line sm:grid-cols-2 lg:grid-cols-5">
-            {stages.map((p, i) => (
-              <li key={p.step} className="flex flex-col gap-4 bg-paper p-6 md:p-8">
-                <span className="font-mono text-[0.8rem] text-bronze tabular-nums">{String(i + 1).padStart(2, "0")}</span>
-                <span className="font-display text-[1.7rem] leading-tight">{p.step}</span>
-                <span className="text-[0.95rem] text-muted">{p.body}</span>
-              </li>
-            ))}
-          </ol>
+          <div className="mt-14">
+            <ProcessJourney stages={stages} />
+          </div>
         </div>
       </div>
     </section>

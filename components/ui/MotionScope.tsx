@@ -12,6 +12,7 @@ import { ensureGsap, gsap, ScrollTrigger, SplitText, useGSAP } from "@/lib/gsap"
  *   data-reveal="stagger"  fade the element's children in sequence
  *   data-reveal="clip"     an image plate opens from a narrow band
  *   data-reveal="lines"    a heading rises line by line from a mask
+ *   data-reveal="curtain"  a dark section opens from an inset panel to full bleed
  *   data-parallax          a child image drifts slightly against the scroll
  *
  * Everything is skipped when the visitor prefers reduced motion.
@@ -53,6 +54,15 @@ export function MotionScope({ children }: { children: React.ReactNode }) {
             onSplit: (self) =>
               gsap.from(self.lines, { yPercent: 105, duration: 1.15, stagger: 0.08, ease: "power4.out", scrollTrigger: once(el) }),
           });
+        });
+
+        // Dark plates open out to full bleed as they arrive: a curtain between sections.
+        q('[data-reveal="curtain"]').forEach((el) => {
+          gsap.fromTo(
+            el,
+            { clipPath: "inset(6% 4% 0% 4% round 28px)" },
+            { clipPath: "inset(0% 0% 0% 0% round 0px)", ease: "none", scrollTrigger: { trigger: el, start: "top bottom", end: "top 30%", scrub: true } },
+          );
         });
 
         q("[data-parallax]").forEach((el) => {

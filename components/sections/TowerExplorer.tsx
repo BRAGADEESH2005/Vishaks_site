@@ -53,7 +53,7 @@ export function TowerExplorer() {
     <div className="grid gap-10 md:grid-cols-12">
       <div ref={wrap} className="relative aspect-[4/5] overflow-hidden bg-ink-3 md:col-span-8 md:aspect-[16/11]">
         {!live && (
-          <Image src={conceptImages.kadalFacade.src} alt={conceptImages.kadalFacade.alt} fill sizes="(min-width: 768px) 66vw, 100vw" className="object-cover opacity-80" />
+          <Image src={conceptImages.residentialFacade.src} alt={conceptImages.residentialFacade.alt} fill sizes="(min-width: 768px) 66vw, 100vw" className="object-cover opacity-80" />
         )}
         {live && (
           <ErrorBoundary fallback={null} onError={() => setFailed(true)}>

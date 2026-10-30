@@ -12,7 +12,7 @@ type BlockOptions = { floors: number; width: number; depth: number; seed: number
  * A Grade A office block: wide floor plates, deep horizontal bronze sunshades
  * on the long elevations and solid stone end cores.
  */
-function buildOfficeBlock(kit: Kit, stone: THREE.Material, o: BlockOptions) {
+export function buildOfficeBlock(kit: Kit, stone: THREE.Material, o: BlockOptions) {
   const fh = o.floorHeight ?? 4.2;
   const lobby = fh * 1.6;
   const H = lobby + (o.floors - 1) * fh;
@@ -96,8 +96,8 @@ function buildOfficeBlock(kit: Kit, stone: THREE.Material, o: BlockOptions) {
   return { group, glass, height: H };
 }
 
-/** Ambalam Offices (concept): two Grade A blocks around a shaded court with a water channel. */
-export function buildAmbalam(kit: Kit, opts: { lit?: number } = {}): OfficeBuild {
+/** Office Spaces (concept): two Grade A blocks around a shaded court with a water channel. */
+export function buildOfficeCampus(kit: Kit, opts: { lit?: number } = {}): OfficeBuild {
   const lit = opts.lit ?? 0.2;
   const group = new THREE.Group();
   const stone = kit.stone.clone();

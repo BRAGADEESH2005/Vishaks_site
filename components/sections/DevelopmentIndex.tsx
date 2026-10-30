@@ -56,7 +56,7 @@ export function DevelopmentIndex({ projects }: { projects: Project[] }) {
                 <span className="block font-display text-[1.9rem] leading-none transition-transform duration-700 ease-[var(--ease-architect)] md:text-[3.1rem] md:group-hover:translate-x-3">
                   {p.name}
                 </span>
-                <span className="mt-2 block text-[0.9rem] italic text-muted">{p.meaning}</span>
+                <span className="mt-2 block text-[0.9rem] italic text-muted">{p.tagline}</span>
               </span>
               <span className="text-[0.95rem] md:col-span-3">{p.type}</span>
               <span className="text-[0.95rem] text-muted md:col-span-2">{p.corridor}</span>

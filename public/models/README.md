@@ -10,5 +10,5 @@ To replace a concept with a professionally authored model:
 1. Export the model as a compressed glTF binary (`.glb`) with Draco or
    Meshopt geometry compression and KTX2 textures where possible. Aim for
    under 8 MB for the hero.
-2. Save it here, for example `public/models/kadal.glb`.
+2. Save it here, for example `public/models/residential.glb`.
 3. Follow "Replacing the procedural models" in the main README.

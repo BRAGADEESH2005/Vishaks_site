@@ -7,8 +7,23 @@ import { nav, site } from "@/data/site";
 export function SiteFooter() {
   const year = new Date().getFullYear();
   return (
-    <footer className="on-dark bg-ink text-ivory">
-      <div className="gutter shell grid gap-14 pb-10 pt-20 md:grid-cols-12 md:pt-28">
+    <footer className="on-dark relative overflow-hidden bg-ink text-ivory">
+      <div aria-hidden="true" className="pointer-events-none absolute -top-40 left-1/2 h-80 w-[70rem] -translate-x-1/2 rounded-full bg-bronze/20 blur-[120px]" />
+      <div className="gutter shell relative border-b border-line-light pb-16 pt-24 md:pb-24 md:pt-32">
+        <p className="label text-bronze-light">{site.city}</p>
+        <p className="mt-6 max-w-5xl font-display text-[clamp(2.8rem,8vw,7.5rem)] leading-[0.95] tracking-tight">
+          Where Chennai <em className="italic text-bronze-light">grows</em> next.
+        </p>
+        <div className="mt-12 flex flex-wrap gap-x-10 gap-y-4">
+          <Link href="/#enquire" className="link-draw text-[1.1rem]">
+            Begin a conversation
+          </Link>
+          <Link href="/#developments" className="link-draw text-[1.1rem] text-ivory/70 hover:text-ivory">
+            See the developments
+          </Link>
+        </div>
+      </div>
+      <div className="gutter shell relative grid gap-14 pb-10 pt-16 md:grid-cols-12 md:pt-20">
         <div className="md:col-span-5">
           <Logo />
           <p className="mt-8 max-w-sm text-ivory/65">{site.description}</p>

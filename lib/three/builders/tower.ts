@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import type { Kit } from "../kit";
 import { createRng } from "../random";
-import { makeFacadeTextures } from "../textures";
+import { makeFacadeTextures, makePanelNormal } from "../textures";
 import { box, instanced, type Placement } from "./common";
 import { buildCanopyTrees, buildShrubs } from "./landscape";
 
@@ -50,18 +50,21 @@ export function buildResidentialTower(kit: Kit, o: TowerOptions): Tower {
   ];
   for (const f of faces) {
     const bays = Math.max(4, Math.round(f.w / 1.65));
-    const tex = makeFacadeTextures({ bays, floors: o.floors, seed: f.seed, lit: o.lit, spandrel: 0.2, glassLevel: 92 });
+    const tex = makeFacadeTextures({ bays, floors: o.floors, seed: f.seed, lit: o.lit, spandrel: 0.2, glassLevel: 104 });
+    const panel = makePanelNormal(bays, o.floors, f.seed + 11, 12);
+    tex.roughnessMap.dispose();
     const mat = new THREE.MeshPhysicalMaterial({
       map: tex.map,
       emissiveMap: tex.emissiveMap,
       emissive: "#ffffff",
       emissiveIntensity: 1.6,
-      roughnessMap: tex.roughnessMap,
-      roughness: 0.22,
-      metalness: 0.8,
-      envMapIntensity: 1.5,
-      clearcoat: 0.6,
-      clearcoatRoughness: 0.08,
+      roughnessMap: panel.roughness,
+      roughness: 1,
+      normalMap: panel.normal,
+      metalness: 0.88,
+      envMapIntensity: 1.3,
+      clearcoat: 1,
+      clearcoatRoughness: 0.05,
     });
     glass.push(mat);
     const plane = new THREE.Mesh(new THREE.PlaneGeometry(f.w, H), mat);

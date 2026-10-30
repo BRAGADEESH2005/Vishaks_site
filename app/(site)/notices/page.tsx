@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import Image from "next/image";
+import heroImage from "@/public/images/concepts/cbd-hero.jpg";
 
 export const metadata: Metadata = {
   title: "Notices and credits",
@@ -11,15 +13,20 @@ const credits = [
   { name: "IBM Plex Mono", by: "IBM Corp.", licence: "SIL Open Font License 1.1" },
   { name: "Three.js, React Three Fiber, Drei", by: "three.js and Poimandres contributors", licence: "MIT" },
   { name: "GSAP and ScrollTrigger", by: "GreenSock (Webflow)", licence: "GSAP standard licence (free)" },
+  { name: "HDRI skies: Venice Sunset, Potsdamer Platz, Dikhololo Night", by: "Poly Haven", licence: "CC0" },
+  { name: "postprocessing, N8AO, Lenis", by: "Their contributors", licence: "Zlib, CC0, MIT" },
   { name: "Lucide icons", by: "Lucide contributors", licence: "ISC" },
 ];
 
 export default function NoticesPage() {
   return (
     <main id="main" className="bg-ivory">
-      <div className="on-dark bg-ink pb-16 pt-36 text-ivory md:pb-20 md:pt-44">
+      <div className="on-dark relative isolate overflow-hidden bg-ink pb-16 pt-36 text-ivory md:pb-24 md:pt-52">
+        <Image src={heroImage} alt="" fill priority sizes="100vw" placeholder="blur" className="-z-20 object-cover opacity-45" />
+        <div aria-hidden="true" className="absolute inset-0 -z-10 bg-gradient-to-t from-ink via-ink/70 to-ink/30" />
         <div className="gutter shell">
-          <h1 className="text-display-l">Notices and credits</h1>
+          <p className="label text-bronze-light">Transparency</p>
+          <h1 className="mt-5 text-display-l">Notices and credits</h1>
         </div>
       </div>
       <div className="gutter shell grid gap-16 py-20 md:grid-cols-12 md:py-28">
@@ -29,11 +36,11 @@ export default function NoticesPage() {
           </h2>
           <div className="mt-8 space-y-5 text-[1.05rem] text-muted">
             <p>
-              Kadal Residences, Marutham, Ambalam Offices and Sandhai are design concepts prepared for this website. They are not
+              Office Spaces, Residential Spaces, Coworking Spaces and Retail Spaces are design concepts prepared for this website. They are not
               launched projects and are not offered for sale or lease.
             </p>
             <p>
-              Every image is a computer-generated visualisation of a procedural 3D model, rendered in the browser. Figures such as
+              Every image is a computer-generated visualisation of a procedural 3D model, rendered in the browser. Vishaks Central, the business district in the skyline sequence, is also a design concept. Figures such as
               storeys, floor areas and plot counts come from those concept models and are illustrative.
             </p>
             <p>No project will be marketed before it is registered with the Tamil Nadu Real Estate Regulatory Authority.</p>

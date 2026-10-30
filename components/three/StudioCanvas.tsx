@@ -1,17 +1,22 @@
 "use client";
 
+import { useProgress } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { useRef } from "react";
 import * as THREE from "three";
 import { getShot } from "@/lib/three/shots";
 import { Atmosphere } from "./Atmosphere";
+import { Finish } from "./Finish";
 import { SceneById } from "./SceneById";
 
 function Rig({ shotId }: { shotId: string }) {
   const shot = getShot(shotId);
   const frames = useRef(0);
+  const loading = useProgress((s) => s.active);
   useFrame((state) => {
     if (!shot) return;
+    state.invalidate();
+    if (loading) return; // wait for the HDRI before counting frames
     if (frames.current === 0) {
       const cam = state.camera as THREE.PerspectiveCamera;
       const { width, height } = state.size;
@@ -25,7 +30,7 @@ function Rig({ shotId }: { shotId: string }) {
       cam.updateProjectionMatrix();
     }
     frames.current += 1;
-    if (frames.current === 8) {
+    if (frames.current === 24) {
       document.body.dataset.ready = "1";
       state.setFrameloop("never");
     }
@@ -47,6 +52,7 @@ export function StudioCanvas({ shotId }: { shotId: string }) {
       >
         <Atmosphere preset={shot.preset} shadow={shot.shadow} />
         <SceneById id={shot.scene} preset={shot.preset} />
+        <Finish bloomThreshold={shot.preset === "daylight" ? 2.2 : 0.92} />
         <Rig shotId={shotId} />
       </Canvas>
     </div>

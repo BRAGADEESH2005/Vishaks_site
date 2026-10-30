@@ -3,6 +3,7 @@ import { Credibility } from "@/components/sections/Credibility";
 import { Enquiry } from "@/components/sections/Enquiry";
 import { Hero } from "@/components/sections/Hero";
 import { Introduction } from "@/components/sections/Introduction";
+import { SkylineSection } from "@/components/sections/SkylineSection";
 import { CommercialPortfolio, ResidentialPortfolio, SignatureDevelopments } from "@/components/sections/Portfolio";
 import { MotionScope } from "@/components/ui/MotionScope";
 
@@ -12,6 +13,7 @@ export default function HomePage() {
       <MotionScope>
         <Hero />
         <Introduction />
+        <SkylineSection />
         <SignatureDevelopments />
         <ResidentialPortfolio />
         <CommercialPortfolio />

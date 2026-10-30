@@ -8,7 +8,7 @@ const chapters = [
     theme: "Design",
     title: "Proportion before decoration",
     body: "Slender towers on a low stone base, a generous arrival and a clear top. The silhouette is decided first; ornament is left to the light.",
-    image: conceptImages.kadalStreet,
+    image: conceptImages.residentialStreet,
     aspect: "aspect-[3/2]",
   },
   {
@@ -16,7 +16,7 @@ const chapters = [
     theme: "Materials",
     title: "Stone, bronze and glass",
     body: "A short palette chosen for salt air and monsoon rain. Honed stone at the base, bronze-finished metal for fins and louvres, and glass kept in shade.",
-    image: conceptImages.ambalamLouvres,
+    image: conceptImages.officeLouvres,
     aspect: "aspect-[4/5]",
   },
   {
@@ -24,7 +24,7 @@ const chapters = [
     theme: "Landscape",
     title: "Shade you can stand in",
     body: "Podium decks, palms and broad canopy trees do the work of air conditioning outdoors. Water is used where it cools, not where it shows off.",
-    image: conceptImages.kadalDeck,
+    image: conceptImages.residentialDeck,
     aspect: "aspect-[3/2]",
   },
   {
@@ -32,15 +32,15 @@ const chapters = [
     theme: "Space",
     title: "Room between buildings",
     body: "Colonnades, courts and setbacks give the street a sheltered edge. The space between buildings is designed as carefully as the buildings themselves.",
-    image: conceptImages.sandhaiArcade,
+    image: conceptImages.retailArcade,
     aspect: "aspect-[4/5]",
   },
   {
     id: "lifestyle",
     theme: "Lifestyle",
-    title: "Streets made for walking",
-    body: "Internal roads lined with trees, low compound walls and front gardens. A neighbourhood should feel finished on the day the first family moves in.",
-    image: conceptImages.maruthamAvenue,
+    title: "Space to meet, not just to work",
+    body: "Roof terraces, meeting pavilions and shaded forecourts give people somewhere to gather. A building should feel finished on the day its first occupants move in.",
+    image: conceptImages.coworkingTerrace,
     aspect: "aspect-[3/2]",
   },
 ];

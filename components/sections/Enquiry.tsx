@@ -4,7 +4,7 @@ import { EnquiryForm } from "./EnquiryForm";
 
 export function Enquiry() {
   return (
-    <section id="enquire" aria-labelledby="enquire-title" className="on-dark relative overflow-hidden bg-ink-2 py-28 text-ivory md:py-40">
+    <section id="enquire" aria-labelledby="enquire-title" data-reveal="curtain" className="on-dark relative overflow-hidden bg-ink-2 py-28 text-ivory md:py-40">
       <div className="gutter shell grid gap-16 md:grid-cols-12 md:gap-10">
         <div className="md:col-span-5">
           <p className="label text-ivory/55">Enquire</p>

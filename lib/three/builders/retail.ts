@@ -8,10 +8,10 @@ import { buildRoad } from "./context";
 export type RetailBuild = { group: THREE.Group; glowing: Array<{ material: THREE.MeshStandardMaterial; base: number }> };
 
 /**
- * Sandhai (concept): a four-storey retail and workspace block. A deep stone
+ * Retail Spaces (concept): a four-storey retail and showroom block. A deep stone
  * colonnade shades the shopfronts; the upper floors sit behind a jaali screen.
  */
-export function buildSandhai(kit: Kit): RetailBuild {
+export function buildRetail(kit: Kit): RetailBuild {
   const group = new THREE.Group();
   const glowing: RetailBuild["glowing"] = [];
   const W = 96;

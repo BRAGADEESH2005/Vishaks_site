@@ -2,15 +2,15 @@
 
 import { useLayoutEffect } from "react";
 import { ATMOSPHERES, type AtmosphereId } from "@/lib/three/atmosphere";
-import { buildAmbalam } from "@/lib/three/builders/ambalam";
+import { buildOfficeCampus } from "@/lib/three/builders/office";
 import { buildContextCity, buildGround } from "@/lib/three/builders/context";
-import { buildMarutham } from "@/lib/three/builders/marutham";
-import { buildSandhai } from "@/lib/three/builders/sandhai";
+import { buildCoworking } from "@/lib/three/builders/coworking";
+import { buildRetail } from "@/lib/three/builders/retail";
 import { useBuilt } from "./useBuilt";
 
-export function AmbalamScene({ preset }: { preset: AtmosphereId }) {
+export function OfficeScene({ preset }: { preset: AtmosphereId }) {
   const built = useBuilt((kit) => {
-    const site = buildAmbalam(kit, { lit: 0.3 });
+    const site = buildOfficeCampus(kit, { lit: 0.3 });
     const ground = buildGround(kit);
     const city = buildContextCity({
       seed: 12,
@@ -39,26 +39,40 @@ export function AmbalamScene({ preset }: { preset: AtmosphereId }) {
   );
 }
 
-export function MaruthamScene({ preset }: { preset: AtmosphereId }) {
+export function CoworkingScene({ preset }: { preset: AtmosphereId }) {
   const built = useBuilt((kit) => {
-    const site = buildMarutham(kit);
-    kit.ground.color.set("#9aa07a"); // rural red earth and scrub, not city dust
+    const site = buildCoworking(kit);
     const ground = buildGround(kit);
-    const setGlow = (g: number) => site.glowing.forEach((m) => (m.emissiveIntensity = 1.4 * g));
-    return { site, ground, setGlow, roots: [site.group, ground] };
+    const city = buildContextCity({
+      seed: 41,
+      inner: 160,
+      outer: 1400,
+      count: 300,
+      maxHeight: 60,
+      lit: 0.25,
+      light: "office",
+      avoid: (x, z) => z > 40 && x < 40 && Math.hypot(x, z) < 480,
+    });
+    const setGlow = (g: number) => {
+      site.glowing.forEach(({ material, base }) => (material.emissiveIntensity = base * g + 0.1));
+      kit.warmLight.emissiveIntensity = 2.2 * g + 0.2;
+      city.material.emissiveIntensity = 1.1 * g;
+    };
+    return { site, ground, city, setGlow, roots: [site.group, ground, city.mesh] };
   });
   useLayoutEffect(() => built.setGlow(ATMOSPHERES[preset].glow), [preset, built]);
   return (
     <group>
       <primitive object={built.ground} />
+      <primitive object={built.city.mesh} />
       <primitive object={built.site.group} />
     </group>
   );
 }
 
-export function SandhaiScene({ preset }: { preset: AtmosphereId }) {
+export function RetailScene({ preset }: { preset: AtmosphereId }) {
   const built = useBuilt((kit) => {
-    const site = buildSandhai(kit);
+    const site = buildRetail(kit);
     const ground = buildGround(kit);
     const city = buildContextCity({
       seed: 21,

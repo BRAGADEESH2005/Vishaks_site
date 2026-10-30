@@ -81,7 +81,7 @@ export function buildContextCity(o: ContextOptions) {
 
 /** Large ground with optional sea beyond a coastline at x = coastX. */
 export function buildGround(kit: Kit, opts: { size?: number; coastX?: number } = {}) {
-  const size = opts.size ?? 6000;
+  const size = opts.size ?? 9000;
   const group = new THREE.Group();
   const land = new THREE.Mesh(new THREE.PlaneGeometry(size, size), kit.ground);
   land.rotation.x = -Math.PI / 2;

@@ -4,7 +4,7 @@ Render the concept images from the dev-only /studio route.
 Usage (with `npm run dev` running on port 3000):
     pip install playwright && python -m playwright install chromium
     python scripts/capture-stills.py                 # every shot
-    python scripts/capture-stills.py kadal-hero      # one shot
+    python scripts/capture-stills.py residential-hero      # one shot
 
 Images are written to public/images/concepts/<shot>.jpg
 """

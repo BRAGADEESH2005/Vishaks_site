@@ -302,3 +302,39 @@ export function makeFrondAlpha(seed = 11) {
   }
   return toTexture(c, { srgb: false });
 }
+
+/**
+ * Curtain-wall "oil-canning": every glass panel sits at a very slightly
+ * different angle, so reflections break up panel by panel the way they do on
+ * real towers. Returns a tileable normal map plus a matching roughness map.
+ */
+export function makePanelNormal(bays: number, floors: number, seed: number, cell = 16, strength = 0.06) {
+  const rng = createRng(seed);
+  const w = bays * cell;
+  const h = floors * cell;
+  const [cn, n] = canvas(w, h);
+  const [cr, r] = canvas(w, h);
+  for (let f = 0; f < floors; f++)
+    for (let b = 0; b < bays; b++) {
+      const tx = (rng() - 0.5) * strength;
+      const ty = (rng() - 0.5) * strength;
+      const len = Math.hypot(tx, ty, 1);
+      n.fillStyle = `rgb(${Math.round((tx / len) * 127 + 128)},${Math.round((ty / len) * 127 + 128)},${Math.round((1 / len) * 127 + 128)})`;
+      n.fillRect(b * cell, f * cell, cell, cell);
+      const g = Math.round(range(rng, 10, 38));
+      r.fillStyle = `rgb(${g},${g},${g})`;
+      r.fillRect(b * cell, f * cell, cell, cell);
+    }
+  // Mullion and transom lines read as rough metal, flat to the panel.
+  n.fillStyle = "rgb(128,128,255)";
+  r.fillStyle = "rgb(150,150,150)";
+  for (let b = 0; b <= bays; b++) {
+    n.fillRect(b * cell - 1, 0, 2, h);
+    r.fillRect(b * cell - 1, 0, 2, h);
+  }
+  for (let f = 0; f <= floors; f++) {
+    n.fillRect(0, f * cell - 1, w, 2);
+    r.fillRect(0, f * cell - 1, w, 2);
+  }
+  return { normal: toTexture(cn, { srgb: false, repeat: true }), roughness: toTexture(cr, { srgb: false, repeat: true }) };
+}

@@ -1,14 +1,14 @@
 import type { StaticImageData } from "next/image";
-import ambalamExterior from "@/public/images/concepts/ambalam-exterior.jpg";
-import ambalamLouvres from "@/public/images/concepts/ambalam-louvres.jpg";
-import kadalDeck from "@/public/images/concepts/kadal-deck.jpg";
-import kadalFacade from "@/public/images/concepts/kadal-facade.jpg";
-import kadalHero from "@/public/images/concepts/kadal-hero.jpg";
-import kadalStreet from "@/public/images/concepts/kadal-street.jpg";
-import maruthamAerial from "@/public/images/concepts/marutham-aerial.jpg";
-import maruthamAvenue from "@/public/images/concepts/marutham-avenue.jpg";
-import sandhaiArcade from "@/public/images/concepts/sandhai-arcade.jpg";
-import sandhaiStreet from "@/public/images/concepts/sandhai-street.jpg";
+import officeExterior from "@/public/images/concepts/office-exterior.jpg";
+import officeLouvres from "@/public/images/concepts/office-louvres.jpg";
+import residentialDeck from "@/public/images/concepts/residential-deck.jpg";
+import residentialFacade from "@/public/images/concepts/residential-facade.jpg";
+import residentialHero from "@/public/images/concepts/residential-hero.jpg";
+import residentialStreet from "@/public/images/concepts/residential-street.jpg";
+import coworkingExterior from "@/public/images/concepts/coworking-exterior.jpg";
+import coworkingTerrace from "@/public/images/concepts/coworking-terrace.jpg";
+import retailArcade from "@/public/images/concepts/retail-arcade.jpg";
+import retailStreet from "@/public/images/concepts/retail-street.jpg";
 
 /**
  * SAMPLE CONTENT. These four developments are design concepts created for this
@@ -21,8 +21,8 @@ export type ProjectImage = { src: StaticImageData; alt: string; caption: string 
 export type Project = {
   slug: string;
   name: string;
-  /** What the name means, shown as a small gloss. */
-  meaning: string;
+  /** One line on what the concept is, shown under the name. */
+  tagline: string;
   segment: "residential" | "commercial";
   type: string;
   corridor: string;
@@ -38,53 +38,53 @@ export type Project = {
 };
 
 export const conceptImages = {
-  kadalHero: {
-    src: kadalHero,
+  residentialHero: {
+    src: residentialHero,
     alt: "Two slender residential towers with bronze fins and lit windows rising from a stone podium at dusk, palms along the street.",
-    caption: "Kadal Residences at dusk. Concept visualisation.",
+    caption: "Residential Spaces at dusk. Concept visualisation.",
   },
-  kadalFacade: {
-    src: kadalFacade,
+  residentialFacade: {
+    src: residentialFacade,
     alt: "Looking up the tower facade: staggered balconies, glass balustrades and deep floor slabs against a dark blue sky.",
     caption: "Staggered balconies on the south elevation. Concept visualisation.",
   },
-  kadalDeck: {
-    src: kadalDeck,
+  residentialDeck: {
+    src: residentialDeck,
     alt: "A lap pool on a landscaped podium deck with palms, loungers and the towers lit by low evening sun.",
     caption: "The podium deck and lap pool. Concept visualisation.",
   },
-  kadalStreet: {
-    src: kadalStreet,
+  residentialStreet: {
+    src: residentialStreet,
     alt: "Street-level view at blue hour: a warmly lit double-height lobby behind stone piers and a cantilevered canopy.",
     caption: "Arrival court at blue hour. Concept visualisation.",
   },
-  maruthamAerial: {
-    src: maruthamAerial,
-    alt: "Aerial view of a plotted community in golden light: plots, tree-lined roads, villas and a central park with a pond.",
-    caption: "Marutham, plotted community layout. Concept visualisation.",
+  coworkingExterior: {
+    src: coworkingExterior,
+    alt: "A low-rise workspace campus of two office blocks with bronze sunshades and stone cores, a glass meeting pavilion on the roof, over a granite forecourt.",
+    caption: "Coworking Spaces from the forecourt. Concept visualisation.",
   },
-  maruthamAvenue: {
-    src: maruthamAvenue,
-    alt: "Eye-level view along a tree-lined internal road with low compound walls and two-storey villas.",
-    caption: "An internal avenue. Concept visualisation.",
+  coworkingTerrace: {
+    src: coworkingTerrace,
+    alt: "The roof of the workspace campus at dusk: a lit glass meeting pavilion and shared terraces behind glass balustrades.",
+    caption: "The rooftop meeting pavilion and terraces. Concept visualisation.",
   },
-  ambalamExterior: {
-    src: ambalamExterior,
+  officeExterior: {
+    src: officeExterior,
     alt: "An office building with stone end cores and bronze horizontal sunshades, a long water channel leading to the entrance.",
-    caption: "Ambalam Offices from the forecourt. Concept visualisation.",
+    caption: "Office Spaces from the forecourt. Concept visualisation.",
   },
-  ambalamLouvres: {
-    src: ambalamLouvres,
+  officeLouvres: {
+    src: officeLouvres,
     alt: "Looking up at layered bronze sunshades and glazing on an office facade.",
     caption: "Deep bronze sunshades on the long elevations. Concept visualisation.",
   },
-  sandhaiStreet: {
-    src: sandhaiStreet,
+  retailStreet: {
+    src: retailStreet,
     alt: "A four-storey building with a terracotta jaali screen above a lit stone colonnade at dusk, palms along the road.",
-    caption: "Sandhai from the street. Concept visualisation.",
+    caption: "Retail Spaces from the street. Concept visualisation.",
   },
-  sandhaiArcade: {
-    src: sandhaiArcade,
+  retailArcade: {
+    src: retailArcade,
     alt: "Under a deep stone colonnade: tall columns, warm shopfronts and long evening shadows on the pavement.",
     caption: "The shaded colonnade. Concept visualisation.",
   },
@@ -94,94 +94,9 @@ const img = conceptImages;
 
 export const projects: Project[] = [
   {
-    slug: "kadal-residences",
-    name: "Kadal Residences",
-    meaning: "Kadal means sea in Tamil",
-    segment: "residential",
-    type: "Residential towers",
-    corridor: "OMR corridor",
-    status: "Concept",
-    summary: "Two slender towers on a landscaped podium, turned to catch the sea breeze and shaded by bronze fins.",
-    description: [
-      "A concept for the coastal side of the IT corridor. Two towers stand on a shared podium so that the ground plane can be given back to landscape: a lap pool, a lawn under shade trees and palms along the street.",
-      "Each tower is wrapped in deep floor slabs and staggered balconies that shade the glass from the afternoon sun. Bronze fins on the side elevations cut glare while keeping views open toward the coast.",
-    ],
-    facts: [
-      { label: "Type", value: "Residential towers" },
-      { label: "Location", value: "OMR corridor, Chennai" },
-      { label: "Status", value: "Concept, not yet launched" },
-    ],
-    specs: [
-      {
-        group: "Built form (concept model)",
-        items: [
-          { label: "Towers", value: "Two, of 34 and 26 storeys" },
-          { label: "Podium", value: "Double-height lobby with a stone upper level" },
-          { label: "Crown", value: "Setback pavilion with a bronze pergola and roof garden" },
-        ],
-      },
-      {
-        group: "Landscape",
-        items: [
-          { label: "Podium deck", value: "28 m lap pool, lawn and shade trees" },
-          { label: "Sky gardens", value: "Recessed planted floors partway up each tower" },
-          { label: "Street", value: "Palm-lined frontage with a shaded arrival court" },
-        ],
-      },
-      {
-        group: "Facade",
-        items: [
-          { label: "Main elevation", value: "Staggered balconies with glass balustrades" },
-          { label: "Side elevations", value: "Vertical bronze fins of varying depth" },
-        ],
-      },
-    ],
-    cover: img.kadalHero,
-    gallery: [img.kadalHero, img.kadalFacade, img.kadalDeck, img.kadalStreet],
-    explorer: "tower",
-  },
-  {
-    slug: "marutham",
-    name: "Marutham",
-    meaning: "Marutham is the Sangam-era name for fertile farmland",
-    segment: "residential",
-    type: "Plotted community",
-    corridor: "GST Road belt",
-    status: "Concept",
-    summary: "An approved-layout plotted community with roads, drainage, avenue trees and a park laid before the first plot is sold.",
-    description: [
-      "A concept for a gated plotted community on the southern belt. Roads, kerbs, a central park and avenue planting are built first, so buyers see the finished setting of their plot rather than a bare field.",
-      "Plots are sized in grounds, the way Chennai buys land, and arranged in pairs of rows along shaded internal roads. Compound walls and the planting edge are handed over with each plot.",
-    ],
-    facts: [
-      { label: "Type", value: "Plotted community" },
-      { label: "Location", value: "GST Road belt, Chennai" },
-      { label: "Status", value: "Concept, not yet launched" },
-    ],
-    specs: [
-      {
-        group: "Layout (concept model)",
-        items: [
-          { label: "Plots", value: "96 in the concept layout" },
-          { label: "Plot size", value: "Around 1.4 grounds each in the model (1 ground = 2,400 sq ft)" },
-          { label: "Internal roads", value: "10 m, with kerbs and avenue trees" },
-        ],
-      },
-      {
-        group: "Open space",
-        items: [
-          { label: "Central park", value: "A planted strip with a pond through the middle of the layout" },
-          { label: "Entrance", value: "Stone pylons and a palm avenue" },
-        ],
-      },
-    ],
-    cover: img.maruthamAerial,
-    gallery: [img.maruthamAerial, img.maruthamAvenue],
-  },
-  {
-    slug: "ambalam-offices",
-    name: "Ambalam Offices",
-    meaning: "Ambalam is a Tamil word for a public hall",
+    slug: "office-spaces",
+    name: "Office Spaces",
+    tagline: "Grade A workplaces on the IT corridor",
     segment: "commercial",
     type: "Grade A offices",
     corridor: "OMR corridor",
@@ -209,28 +124,114 @@ export const projects: Project[] = [
         group: "Environment",
         items: [
           { label: "Sunshading", value: "Two tiers of bronze louvres on each long elevation" },
-          { label: "Forecourt", value: "Shade-tree grove, benches and a water channel" },
+          { label: "Forecourt", value: "Shaded seating and a water channel" },
         ],
       },
     ],
-    cover: img.ambalamExterior,
-    gallery: [img.ambalamExterior, img.ambalamLouvres],
+    cover: img.officeExterior,
+    gallery: [img.officeExterior, img.officeLouvres],
   },
   {
-    slug: "sandhai",
-    name: "Sandhai",
-    meaning: "Sandhai means market in Tamil",
+    slug: "residential-spaces",
+    name: "Residential Spaces",
+    tagline: "High-rise living on the airport belt",
+    segment: "residential",
+    type: "Residential towers",
+    corridor: "GST Road belt",
+    status: "Concept",
+    summary: "Two slender towers on a landscaped podium, turned to catch the prevailing breeze and shaded by bronze fins.",
+    description: [
+      "A concept for the southern belt along GST Road, close to the airport and the suburban rail line. Two towers stand on a shared podium so that the ground plane can be given back to the residents: a lap pool, a lawn and a shaded street frontage.",
+      "Each tower is wrapped in deep floor slabs and staggered balconies that shade the glass from the afternoon sun. Bronze fins on the side elevations cut glare while keeping the views open.",
+    ],
+    facts: [
+      { label: "Type", value: "Residential towers" },
+      { label: "Location", value: "GST Road belt, Chennai" },
+      { label: "Status", value: "Concept, not yet launched" },
+    ],
+    specs: [
+      {
+        group: "Built form (concept model)",
+        items: [
+          { label: "Towers", value: "Two, of 34 and 26 storeys" },
+          { label: "Podium", value: "Double-height lobby with a stone upper level" },
+          { label: "Crown", value: "Setback pavilion with a bronze pergola and roof garden" },
+        ],
+      },
+      {
+        group: "Amenities",
+        items: [
+          { label: "Podium deck", value: "28 m lap pool and a shaded lawn" },
+          { label: "Sky gardens", value: "Recessed planted floors partway up each tower" },
+          { label: "Street", value: "A shaded arrival court" },
+        ],
+      },
+      {
+        group: "Facade",
+        items: [
+          { label: "Main elevation", value: "Staggered balconies with glass balustrades" },
+          { label: "Side elevations", value: "Vertical bronze fins of varying depth" },
+        ],
+      },
+    ],
+    cover: img.residentialHero,
+    gallery: [img.residentialHero, img.residentialFacade, img.residentialDeck, img.residentialStreet],
+    explorer: "tower",
+  },
+  {
+    slug: "coworking-spaces",
+    name: "Coworking Spaces",
+    tagline: "Flexible workspace for the industrial belt",
     segment: "commercial",
-    type: "Retail and workspace",
+    type: "Managed coworking campus",
+    corridor: "Sriperumbudur and Oragadam",
+    status: "Concept",
+    summary: "A terraced, low-rise workspace campus: flexible floors behind bronze sunshades, a glass meeting pavilion on the roof and shared terraces.",
+    description: [
+      "A concept for the automotive and electronics belt, where engineering, supplier and management teams need good workspace close to the plants rather than a long drive back into the city.",
+      "Two office blocks meet at an L around a granite forecourt. Floors can be let as open desks, private suites or whole floors, and a glass meeting pavilion and lit roof terraces give every member shared space for meetings, training and events.",
+    ],
+    facts: [
+      { label: "Type", value: "Managed coworking campus" },
+      { label: "Location", value: "Sriperumbudur and Oragadam, Chennai" },
+      { label: "Status", value: "Concept, not yet launched" },
+    ],
+    specs: [
+      {
+        group: "Workspace (concept model)",
+        items: [
+          { label: "Blocks", value: "Two, of 7 and 5 storeys" },
+          { label: "Workspace", value: "Open desks, private suites and whole floors" },
+          { label: "Meeting pavilion", value: "A two-storey glass pavilion on the roof" },
+        ],
+      },
+      {
+        group: "Shared space",
+        items: [
+          { label: "Terraces", value: "Roof terraces on both blocks, behind glass balustrades" },
+          { label: "Forecourt", value: "Granite paving with benches and lighting" },
+          { label: "Operation", value: "With a workspace operator partner, to be appointed" },
+        ],
+      },
+    ],
+    cover: img.coworkingExterior,
+    gallery: [img.coworkingExterior, img.coworkingTerrace],
+  },
+  {
+    slug: "retail-spaces",
+    name: "Retail Spaces",
+    tagline: "High-street retail on the ring road",
+    segment: "commercial",
+    type: "Retail and showrooms",
     corridor: "Outer Ring Road West",
     status: "Concept",
-    summary: "A street-facing retail and workspace block: shopfronts under a deep stone colonnade, offices behind a terracotta jaali screen.",
+    summary: "A street-facing retail block: shopfronts and showrooms under a deep stone colonnade, with upper floors behind a terracotta jaali screen.",
     description: [
-      "A concept for neighbourhood retail on the western ring, where new housing needs shops, clinics and small offices within walking distance.",
+      "A concept for high-street retail on the western ring, where new housing needs shops, showrooms, clinics and services within easy reach.",
       "A deep stone colonnade shades the shopfronts and the pavement in front of them. The upper floors sit behind a terracotta screen cut in a jaali pattern, which filters light and gives the building one quiet, continuous face to the street.",
     ],
     facts: [
-      { label: "Type", value: "Retail and workspace" },
+      { label: "Type", value: "Retail and showrooms" },
       { label: "Location", value: "Outer Ring Road West, Chennai" },
       { label: "Status", value: "Concept, not yet launched" },
     ],
@@ -246,13 +247,13 @@ export const projects: Project[] = [
       {
         group: "Facade",
         items: [
-          { label: "Upper floors", value: "Workspace behind a terracotta jaali screen" },
-          { label: "Roof", value: "Terrace with a bronze pergola and planting" },
+          { label: "Upper floors", value: "Showrooms and services behind a terracotta jaali screen" },
+          { label: "Roof", value: "Terrace with a bronze pergola" },
         ],
       },
     ],
-    cover: img.sandhaiStreet,
-    gallery: [img.sandhaiStreet, img.sandhaiArcade],
+    cover: img.retailStreet,
+    gallery: [img.retailStreet, img.retailArcade],
   },
 ];
 
